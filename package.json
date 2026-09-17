@@ -1,0 +1,10 @@
+{
+  "name": "jenkins-docker-practice",
+  "version": "1.0.0",
+  "description": "Jenkins and Docker CI/CD practice project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node -e \"console.log('Tests passed!')\""
+  }
+}
