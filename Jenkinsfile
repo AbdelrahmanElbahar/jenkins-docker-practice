@@ -10,9 +10,14 @@ pipeline {
         APP_NAME = "jenkins-practice-app"
         APP_PORT = "3000"
         DOCKER_IMAGE = "jenkins-practice-app"
+        TARGET_BRANCH = "main"
     }
 
     stages {
+        stage('Branch Gate')
+         { steps { branchGate(env.TARGET_BRANCH) } 
+         
+         }
 
         stage('Build') {
             steps {
