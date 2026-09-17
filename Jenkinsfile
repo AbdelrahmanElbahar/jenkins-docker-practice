@@ -14,10 +14,17 @@ pipeline {
     }
 
     stages {
-        stage('Branch Gate')
-         { steps { branchGate(env.TARGET_BRANCH) } 
-         
-         }
+        stage('Branch Gate') {
+    steps {
+        script {
+            if (env.BRANCH_NAME == env.TARGET_BRANCH || env.GIT_BRANCH == "origin/${env.TARGET_BRANCH}") {
+                echo "Branch gate passed: ${env.TARGET_BRANCH}"
+            } else {
+                error "Pipeline can only run on ${env.TARGET_BRANCH}"
+            }
+        }
+    }
+}
 
         stage('Build') {
             steps {
