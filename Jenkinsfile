@@ -1,20 +1,18 @@
 pipeline {
+
     agent any
 
-     options {
+    options {
         disableConcurrentBuilds()
     }
 
-     environment {
+    environment {
         APP_NAME = "jenkins-practice-app"
         APP_PORT = "3000"
         DOCKER_IMAGE = "jenkins-practice-app"
     }
 
     stages {
-        stage('Branch Gate') {
-            steps { branchGate (https://github.com/AbdelrahmanElbahar/jenkins-docker-practice.git) }
-        }
 
         stage('Build') {
             steps {
@@ -36,17 +34,20 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the application ...'
+                echo 'Deploying the application...'
             }
         }
 
-         stage('Health Check') {
+        stage('Health Check') {
             steps {
                 echo 'Checking application health...'
             }
         }
+    }
 
-         success {
+    post {
+
+        success {
             echo 'CI/CD pipeline completed successfully!'
         }
 
